@@ -56,17 +56,6 @@ CMAKE_BINARY_DIR = /opt/cpp_testcode3/Metaprogramming
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/local/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
@@ -77,6 +66,17 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/local/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -123,6 +123,19 @@ test_p30/fast:
 	$(MAKE) -f CMakeFiles/test_p30.dir/build.make CMakeFiles/test_p30.dir/build
 .PHONY : test_p30/fast
 
+#=============================================================================
+# Target rules for targets named test_p58
+
+# Build rule for target.
+test_p58: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_p58
+.PHONY : test_p58
+
+# fast build rule for target.
+test_p58/fast:
+	$(MAKE) -f CMakeFiles/test_p58.dir/build.make CMakeFiles/test_p58.dir/build
+.PHONY : test_p58/fast
+
 test_p30.o: test_p30.cpp.o
 
 .PHONY : test_p30.o
@@ -150,18 +163,49 @@ test_p30.cpp.s:
 	$(MAKE) -f CMakeFiles/test_p30.dir/build.make CMakeFiles/test_p30.dir/test_p30.cpp.s
 .PHONY : test_p30.cpp.s
 
+test_p58.o: test_p58.cpp.o
+
+.PHONY : test_p58.o
+
+# target to build an object file
+test_p58.cpp.o:
+	$(MAKE) -f CMakeFiles/test_p58.dir/build.make CMakeFiles/test_p58.dir/test_p58.cpp.o
+.PHONY : test_p58.cpp.o
+
+test_p58.i: test_p58.cpp.i
+
+.PHONY : test_p58.i
+
+# target to preprocess a source file
+test_p58.cpp.i:
+	$(MAKE) -f CMakeFiles/test_p58.dir/build.make CMakeFiles/test_p58.dir/test_p58.cpp.i
+.PHONY : test_p58.cpp.i
+
+test_p58.s: test_p58.cpp.s
+
+.PHONY : test_p58.s
+
+# target to generate assembly for a file
+test_p58.cpp.s:
+	$(MAKE) -f CMakeFiles/test_p58.dir/build.make CMakeFiles/test_p58.dir/test_p58.cpp.s
+.PHONY : test_p58.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... rebuild_cache"
-	@echo "... test_p30"
 	@echo "... edit_cache"
+	@echo "... test_p30"
+	@echo "... rebuild_cache"
+	@echo "... test_p58"
 	@echo "... test_p30.o"
 	@echo "... test_p30.i"
 	@echo "... test_p30.s"
+	@echo "... test_p58.o"
+	@echo "... test_p58.i"
+	@echo "... test_p58.s"
 .PHONY : help
 
 
