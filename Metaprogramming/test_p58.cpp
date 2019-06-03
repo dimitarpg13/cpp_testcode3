@@ -3,7 +3,9 @@
 #include <boost/static_assert.hpp>
 #include <boost/mpl/vector_c.hpp>
 #include <boost/mpl/plus.hpp>
+#include <boost/mpl/minus.hpp>
 #include <boost/mpl/int.hpp>
+#include <boost/mpl/transform.hpp>
 #include <boost/mpl/placeholders.hpp>
 namespace mpl = boost::mpl;
 
@@ -23,8 +25,51 @@ typedef mpl::vector_c<int,1,1,-1,0,0,0,0> d_momentum; // ml/t
 typedef mpl::vector_c<int,1,1,-2,0,0,0,0> d_force; // ml/t^2
 typedef mpl::vector_c<int,0,0,0,0,0,0,0> d_scalar; // - 
 
-int main(int argc, char **argv) {
+template <class T, class Dimensions>
+struct quantity
+{
+   explicit quantity(T x)
+       : m_value(x)
+   {}
 
+   T value() const { return m_value; }
+private:
+   T m_value;
+};
+
+template <class T, class D>
+quantity<T,D>
+operator+(quantity<T,D> x, quantity<T,D> y)
+{
+    return quantity<T,D>(x.value() + y.value());
+};
+
+template <class T, class D>
+quantity<T,D>
+operator-(quantity<T,D> x, quantity<T,D> y)
+{
+    return quantity<T,D>(x.value() - y.value());
+};
+
+template <class D1, class D2>
+struct divide_dimensions
+  : mpl::transform< D1,D2,mpl::minus<_1,_2> > // forwarding again
+{};
+
+template <class T, class D1, class D2>
+quantity<T, typename divide_dimensions<D1,D2>::type>
+operator/(quantity<T,D1> x, quantity<T,D2> y) 
+{
+   return quantity<T, typename divide_dimensions<D1,D2>::type> (
+           x.value() / y.value());
+};
+
+int main(int argc, char **argv) {
+    quantity<float,d_length> l (1.0f);
+    quantity<float,d_mass> m(2.0f);
+    quantity<float,d_length> len1 (1.0f);
+    quantity<float,d_length> len2(2.0f);
+    len1 = len1 + len2;
 
     return 0;
 }
