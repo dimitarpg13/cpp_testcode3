@@ -42,10 +42,11 @@ find_package(Boost 1.69 COMPONENTS date_time regex thread serialization system l
 include_directories(${Boost_INCLUDE_DIRS})
 
 
-add_sources(test_p30.cpp test_58.cpp)
+add_sources(test_p30.cpp test_58.cpp test_60.cpp)
 
 add_executable(test_p30 test_p30.cpp)
 add_executable(test_p58 test_p58.cpp)
+add_executable(test_p60 test_p60.cpp)
 
 target_link_libraries(test_p30 LINK_PUBLIC ${Boost_LIBRARIES} )
 target_link_libraries(test_p58 LINK_PUBLIC ${Boost_LIBRARIES} )
