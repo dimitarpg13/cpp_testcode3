@@ -153,6 +153,8 @@ int main(int argc, char **argv) {
     twice<add_pointer_f, int>::type p = &x;
     twice<boost::add_pointer<_1>, int>::type q = &x;
     BOOST_MPL_ASSERT((mpl::equal<r1, mpl::range_c<int, 7, 17> >));
+    BOOST_MPL_ASSERT((mpl::equal<r2, mpl::range_c<int, 5, 15> >));
+    BOOST_MPL_ASSERT((mpl::equal<r3, mpl::range_c<int, 0, 10> >));
 
     return 0;
 }
