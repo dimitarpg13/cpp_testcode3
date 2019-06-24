@@ -10,6 +10,8 @@
 #include <boost/mpl/placeholders.hpp>
 #include <boost/mpl/range_c.hpp>
 #include <boost/mpl/equal.hpp>
+#include <boost/mpl/back_inserter.hpp>
+#include <boost/mpl/size.hpp>
 
 namespace mpl = boost::mpl;
 
@@ -125,6 +127,11 @@ typedef mpl::transform<r1, mpl::minus<_1,mpl::int_<2>>>::type r2;
 
 typedef mpl::reverse_transform<r2,mpl::minus<_1,mpl::int_<5>>,mpl::front_inserter<mpl::vector0<>>>::type r3;
 
+typedef mpl::transform<mpl::range_c<int,0,10>
+                     , mpl::plus<_1,_1>
+                     , mpl::back_inserter< mpl::vector0<> >
+                     >::type r4;
+
 int main(int argc, char **argv) {
     quantity<float,d_length> l (1.0f);
     quantity<float,d_mass> m(2.0f);
@@ -155,6 +162,7 @@ int main(int argc, char **argv) {
     BOOST_MPL_ASSERT((mpl::equal<r1, mpl::range_c<int, 7, 17> >));
     BOOST_MPL_ASSERT((mpl::equal<r2, mpl::range_c<int, 5, 15> >));
     BOOST_MPL_ASSERT((mpl::equal<r3, mpl::range_c<int, 0, 10> >));
-
+    BOOST_MPL_ASSERT_RELATION(mpl::size<r4>::value, ==, 10 );
+    BOOST_MPL_ASSERT((mpl::equal<r4, mpl::vector_c<int, 0, 2, 4, 6, 8, 10, 12, 14, 16, 18> >));
     return 0;
 }
