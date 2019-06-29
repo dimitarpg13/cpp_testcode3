@@ -56,17 +56,6 @@ CMAKE_BINARY_DIR = /opt/cpp_testcode3/Metaprogramming
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/local/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -77,6 +66,17 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/local/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -111,17 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named test_p30
+# Target rules for targets named test_p60
 
 # Build rule for target.
-test_p30: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_p30
-.PHONY : test_p30
+test_p60: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_p60
+.PHONY : test_p60
 
 # fast build rule for target.
-test_p30/fast:
-	$(MAKE) -f CMakeFiles/test_p30.dir/build.make CMakeFiles/test_p30.dir/build
-.PHONY : test_p30/fast
+test_p60/fast:
+	$(MAKE) -f CMakeFiles/test_p60.dir/build.make CMakeFiles/test_p60.dir/build
+.PHONY : test_p60/fast
 
 #=============================================================================
 # Target rules for targets named test_p58
@@ -135,6 +135,58 @@ test_p58: cmake_check_build_system
 test_p58/fast:
 	$(MAKE) -f CMakeFiles/test_p58.dir/build.make CMakeFiles/test_p58.dir/build
 .PHONY : test_p58/fast
+
+#=============================================================================
+# Target rules for targets named test_p30
+
+# Build rule for target.
+test_p30: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_p30
+.PHONY : test_p30
+
+# fast build rule for target.
+test_p30/fast:
+	$(MAKE) -f CMakeFiles/test_p30.dir/build.make CMakeFiles/test_p30.dir/build
+.PHONY : test_p30/fast
+
+#=============================================================================
+# Target rules for targets named test_p63
+
+# Build rule for target.
+test_p63: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_p63
+.PHONY : test_p63
+
+# fast build rule for target.
+test_p63/fast:
+	$(MAKE) -f CMakeFiles/test_p63.dir/build.make CMakeFiles/test_p63.dir/build
+.PHONY : test_p63/fast
+
+#=============================================================================
+# Target rules for targets named test_p62
+
+# Build rule for target.
+test_p62: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_p62
+.PHONY : test_p62
+
+# fast build rule for target.
+test_p62/fast:
+	$(MAKE) -f CMakeFiles/test_p62.dir/build.make CMakeFiles/test_p62.dir/build
+.PHONY : test_p62/fast
+
+#=============================================================================
+# Target rules for targets named test_p63_exp
+
+# Build rule for target.
+test_p63_exp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_p63_exp
+.PHONY : test_p63_exp
+
+# fast build rule for target.
+test_p63_exp/fast:
+	$(MAKE) -f CMakeFiles/test_p63_exp.dir/build.make CMakeFiles/test_p63_exp.dir/build
+.PHONY : test_p63_exp/fast
 
 test_p30.o: test_p30.cpp.o
 
@@ -190,22 +242,146 @@ test_p58.cpp.s:
 	$(MAKE) -f CMakeFiles/test_p58.dir/build.make CMakeFiles/test_p58.dir/test_p58.cpp.s
 .PHONY : test_p58.cpp.s
 
+test_p60.o: test_p60.cpp.o
+
+.PHONY : test_p60.o
+
+# target to build an object file
+test_p60.cpp.o:
+	$(MAKE) -f CMakeFiles/test_p60.dir/build.make CMakeFiles/test_p60.dir/test_p60.cpp.o
+.PHONY : test_p60.cpp.o
+
+test_p60.i: test_p60.cpp.i
+
+.PHONY : test_p60.i
+
+# target to preprocess a source file
+test_p60.cpp.i:
+	$(MAKE) -f CMakeFiles/test_p60.dir/build.make CMakeFiles/test_p60.dir/test_p60.cpp.i
+.PHONY : test_p60.cpp.i
+
+test_p60.s: test_p60.cpp.s
+
+.PHONY : test_p60.s
+
+# target to generate assembly for a file
+test_p60.cpp.s:
+	$(MAKE) -f CMakeFiles/test_p60.dir/build.make CMakeFiles/test_p60.dir/test_p60.cpp.s
+.PHONY : test_p60.cpp.s
+
+test_p62.o: test_p62.cpp.o
+
+.PHONY : test_p62.o
+
+# target to build an object file
+test_p62.cpp.o:
+	$(MAKE) -f CMakeFiles/test_p62.dir/build.make CMakeFiles/test_p62.dir/test_p62.cpp.o
+.PHONY : test_p62.cpp.o
+
+test_p62.i: test_p62.cpp.i
+
+.PHONY : test_p62.i
+
+# target to preprocess a source file
+test_p62.cpp.i:
+	$(MAKE) -f CMakeFiles/test_p62.dir/build.make CMakeFiles/test_p62.dir/test_p62.cpp.i
+.PHONY : test_p62.cpp.i
+
+test_p62.s: test_p62.cpp.s
+
+.PHONY : test_p62.s
+
+# target to generate assembly for a file
+test_p62.cpp.s:
+	$(MAKE) -f CMakeFiles/test_p62.dir/build.make CMakeFiles/test_p62.dir/test_p62.cpp.s
+.PHONY : test_p62.cpp.s
+
+test_p63.o: test_p63.cpp.o
+
+.PHONY : test_p63.o
+
+# target to build an object file
+test_p63.cpp.o:
+	$(MAKE) -f CMakeFiles/test_p63.dir/build.make CMakeFiles/test_p63.dir/test_p63.cpp.o
+.PHONY : test_p63.cpp.o
+
+test_p63.i: test_p63.cpp.i
+
+.PHONY : test_p63.i
+
+# target to preprocess a source file
+test_p63.cpp.i:
+	$(MAKE) -f CMakeFiles/test_p63.dir/build.make CMakeFiles/test_p63.dir/test_p63.cpp.i
+.PHONY : test_p63.cpp.i
+
+test_p63.s: test_p63.cpp.s
+
+.PHONY : test_p63.s
+
+# target to generate assembly for a file
+test_p63.cpp.s:
+	$(MAKE) -f CMakeFiles/test_p63.dir/build.make CMakeFiles/test_p63.dir/test_p63.cpp.s
+.PHONY : test_p63.cpp.s
+
+test_p63_exp.o: test_p63_exp.cpp.o
+
+.PHONY : test_p63_exp.o
+
+# target to build an object file
+test_p63_exp.cpp.o:
+	$(MAKE) -f CMakeFiles/test_p63_exp.dir/build.make CMakeFiles/test_p63_exp.dir/test_p63_exp.cpp.o
+.PHONY : test_p63_exp.cpp.o
+
+test_p63_exp.i: test_p63_exp.cpp.i
+
+.PHONY : test_p63_exp.i
+
+# target to preprocess a source file
+test_p63_exp.cpp.i:
+	$(MAKE) -f CMakeFiles/test_p63_exp.dir/build.make CMakeFiles/test_p63_exp.dir/test_p63_exp.cpp.i
+.PHONY : test_p63_exp.cpp.i
+
+test_p63_exp.s: test_p63_exp.cpp.s
+
+.PHONY : test_p63_exp.s
+
+# target to generate assembly for a file
+test_p63_exp.cpp.s:
+	$(MAKE) -f CMakeFiles/test_p63_exp.dir/build.make CMakeFiles/test_p63_exp.dir/test_p63_exp.cpp.s
+.PHONY : test_p63_exp.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... edit_cache"
-	@echo "... test_p30"
 	@echo "... rebuild_cache"
+	@echo "... edit_cache"
+	@echo "... test_p60"
 	@echo "... test_p58"
+	@echo "... test_p30"
+	@echo "... test_p63"
+	@echo "... test_p62"
+	@echo "... test_p63_exp"
 	@echo "... test_p30.o"
 	@echo "... test_p30.i"
 	@echo "... test_p30.s"
 	@echo "... test_p58.o"
 	@echo "... test_p58.i"
 	@echo "... test_p58.s"
+	@echo "... test_p60.o"
+	@echo "... test_p60.i"
+	@echo "... test_p60.s"
+	@echo "... test_p62.o"
+	@echo "... test_p62.i"
+	@echo "... test_p62.s"
+	@echo "... test_p63.o"
+	@echo "... test_p63.i"
+	@echo "... test_p63.s"
+	@echo "... test_p63_exp.o"
+	@echo "... test_p63_exp.i"
+	@echo "... test_p63_exp.s"
 .PHONY : help
 
 

@@ -12,6 +12,8 @@
 #include <boost/mpl/equal.hpp>
 #include <boost/mpl/back_inserter.hpp>
 #include <boost/mpl/size.hpp>
+#include <boost/mpl/quote.hpp>
+#include <boost/type_traits/is_same.hpp>
 
 namespace mpl = boost::mpl;
 
@@ -132,6 +134,22 @@ typedef mpl::transform<mpl::range_c<int,0,10>
                      , mpl::back_inserter< mpl::vector0<> >
                      >::type r4;
 
+template< typename T > struct f1 
+{
+    typedef T type;
+};
+
+template< typename T1, typename T2, typename T3, typename T4, typename T5 >
+struct f5
+{
+    // no 'type' member!
+};
+
+typedef mpl::quote1<f1>::apply<int>::type tp1;
+typedef mpl::quote5<f5>::apply<char,short,int,long,float>::type tp5;
+
+
+
 int main(int argc, char **argv) {
     quantity<float,d_length> l (1.0f);
     quantity<float,d_mass> m(2.0f);
@@ -164,5 +182,7 @@ int main(int argc, char **argv) {
     BOOST_MPL_ASSERT((mpl::equal<r3, mpl::range_c<int, 0, 10> >));
     BOOST_MPL_ASSERT_RELATION(mpl::size<r4>::value, ==, 10 );
     BOOST_MPL_ASSERT((mpl::equal<r4, mpl::vector_c<int, 0, 2, 4, 6, 8, 10, 12, 14, 16, 18> >));
+    BOOST_MPL_ASSERT((boost::is_same<tp1,int>));
+    BOOST_MPL_ASSERT((boost::is_same<tp5, f5<char, short, int, long, float> >));
     return 0;
 }
