@@ -14,6 +14,13 @@
 #include <boost/mpl/size.hpp>
 #include <boost/mpl/quote.hpp>
 #include <boost/type_traits/is_same.hpp>
+#include <boost/mpl/map.hpp>
+//#include <boost/mpl/map/mapn.hpp>
+#include <boost/mpl/pair.hpp>
+#include <boost/mpl/long.hpp>
+#include <boost/mpl/empty.hpp>
+#include <boost/mpl/at.hpp>
+#include <boost/mpl/void.hpp>
 
 namespace mpl = boost::mpl;
 
@@ -148,7 +155,12 @@ struct f5
 typedef mpl::quote1<f1>::apply<int>::type tp1;
 typedef mpl::quote5<f5>::apply<char,short,int,long,float>::type tp5;
 
-
+typedef mpl::map<
+           mpl::pair<int,unsigned>
+         , mpl::pair<char, unsigned char>
+         , mpl::pair<mpl::long_<5>,char[17]>
+         , mpl::pair<int[42],bool>
+         > m4;
 
 int main(int argc, char **argv) {
     quantity<float,d_length> l (1.0f);
@@ -184,5 +196,12 @@ int main(int argc, char **argv) {
     BOOST_MPL_ASSERT((mpl::equal<r4, mpl::vector_c<int, 0, 2, 4, 6, 8, 10, 12, 14, 16, 18> >));
     BOOST_MPL_ASSERT((boost::is_same<tp1,int>));
     BOOST_MPL_ASSERT((boost::is_same<tp5, f5<char, short, int, long, float> >));
+    BOOST_MPL_ASSERT_RELATION( mpl::size<m4>::value, ==, 4 );
+    BOOST_MPL_ASSERT_NOT(( mpl::empty<m4> ));
+
+    BOOST_MPL_ASSERT(( boost::is_same< mpl::at<m4, int>::type, unsigned > ));
+    BOOST_MPL_ASSERT(( boost::is_same< mpl::at<m4, mpl::long_<5> >::type, char[17] > ));  
+    BOOST_MPL_ASSERT(( boost::is_same< mpl::at<m4, int[42]>::type, bool > ));
+    BOOST_MPL_ASSERT(( boost::is_same< mpl::at<m4, long>::type, mpl::void_ > ));
     return 0;
 }
