@@ -21,6 +21,10 @@
 #include <boost/mpl/empty.hpp>
 #include <boost/mpl/at.hpp>
 #include <boost/mpl/void.hpp>
+#include <boost/mpl/fold.hpp>
+#include <boost/type_traits/is_float.hpp>
+#include <boost/mpl/next.hpp>
+#include <boost/mpl/vector.hpp>
 
 namespace mpl = boost::mpl;
 
@@ -161,6 +165,13 @@ typedef mpl::map<
          , mpl::pair<mpl::long_<5>,char[17]>
          , mpl::pair<int[42],bool>
          > m4;
+
+typedef mpl::vector<long, float, short, double, float, long, long double> types;
+typedef mpl::fold<
+      types
+    , mpl::int_<0>
+    , mpl::if_< boost::is_float<_2>,mpl::next<_1>,_1 >
+    >::type number_of_floats;
 
 int main(int argc, char **argv) {
     quantity<float,d_length> l (1.0f);
