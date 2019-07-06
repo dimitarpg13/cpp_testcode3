@@ -214,5 +214,6 @@ int main(int argc, char **argv) {
     BOOST_MPL_ASSERT(( boost::is_same< mpl::at<m4, mpl::long_<5> >::type, char[17] > ));  
     BOOST_MPL_ASSERT(( boost::is_same< mpl::at<m4, int[42]>::type, bool > ));
     BOOST_MPL_ASSERT(( boost::is_same< mpl::at<m4, long>::type, mpl::void_ > ));
+    BOOST_MPL_ASSERT_RELATION( number_of_floats::value, ==, 4 );
     return 0;
 }
