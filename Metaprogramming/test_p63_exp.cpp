@@ -25,6 +25,7 @@
 #include <boost/type_traits/is_float.hpp>
 #include <boost/mpl/next.hpp>
 #include <boost/mpl/vector.hpp>
+#include <boost/mpl/apply_wrap.hpp>
 
 namespace mpl = boost::mpl;
 
@@ -173,6 +174,31 @@ typedef mpl::fold<
     , mpl::if_< boost::is_float<_2>,mpl::next<_1>,_1 >
     >::type number_of_floats;
 
+struct f0
+{
+    template< typename T = int > struct apply
+    {
+        typedef char type;
+    };
+};
+
+struct g0
+{
+    struct apply { typedef char type; };
+};
+
+struct f2
+{
+    template< typename T1, typename T2 > struct apply
+    {
+        typedef T2 type;
+    };
+};
+
+typedef mpl::apply_wrap0< f0 >::type rr1;
+typedef mpl::apply_wrap0< g0 >::type rr2;
+typedef mpl::apply_wrap2< f2, int, char >::type rr3;
+
 int main(int argc, char **argv) {
     quantity<float,d_length> l (1.0f);
     quantity<float,d_mass> m(2.0f);
@@ -215,5 +241,9 @@ int main(int argc, char **argv) {
     BOOST_MPL_ASSERT(( boost::is_same< mpl::at<m4, int[42]>::type, bool > ));
     BOOST_MPL_ASSERT(( boost::is_same< mpl::at<m4, long>::type, mpl::void_ > ));
     BOOST_MPL_ASSERT_RELATION( number_of_floats::value, ==, 4 );
+
+    BOOST_MPL_ASSERT(( boost::is_same<rr1, char> ));
+    BOOST_MPL_ASSERT(( boost::is_same<rr2, char> ));
+    BOOST_MPL_ASSERT(( boost::is_same<rr3, char> ));
     return 0;
 }
