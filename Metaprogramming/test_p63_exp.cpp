@@ -26,6 +26,9 @@
 #include <boost/mpl/next.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/mpl/apply_wrap.hpp>
+#include <boost/mpl/deref.hpp> 
+#include <boost/mpl/less.hpp>
+#include <boost/mpl/iter_fold.hpp>
 
 namespace mpl = boost::mpl;
 
@@ -198,6 +201,13 @@ struct f2
 typedef mpl::apply_wrap0< f0 >::type rr1;
 typedef mpl::apply_wrap0< g0 >::type rr2;
 typedef mpl::apply_wrap2< f2, int, char >::type rr3;
+
+typedef mpl::vector_c<int, 5, -1, 0, 7, 2, 0, -5, 4> numbers;
+typedef mpl::iter_fold<
+      numbers
+    , mpl::begin<numbers>::type
+    , mpl::if_< mpl::less< mpl::deref<_1>, mpl::deref<_2> >, _2, _1 >
+    >::type max_element_iter;
 
 int main(int argc, char **argv) {
     quantity<float,d_length> l (1.0f);
