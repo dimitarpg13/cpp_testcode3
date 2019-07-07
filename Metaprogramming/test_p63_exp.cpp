@@ -29,6 +29,7 @@
 #include <boost/mpl/deref.hpp> 
 #include <boost/mpl/less.hpp>
 #include <boost/mpl/iter_fold.hpp>
+#include <boost/mpl/begin.hpp>
 
 namespace mpl = boost::mpl;
 
@@ -209,6 +210,9 @@ typedef mpl::iter_fold<
     , mpl::if_< mpl::less< mpl::deref<_1>, mpl::deref<_2> >, _2, _1 >
     >::type max_element_iter;
 
+typedef mpl::vector<char, short, int, long> types2;
+typedef mpl::begin<types2>::type iter2;
+
 int main(int argc, char **argv) {
     quantity<float,d_length> l (1.0f);
     quantity<float,d_mass> m(2.0f);
@@ -255,5 +259,7 @@ int main(int argc, char **argv) {
     BOOST_MPL_ASSERT(( boost::is_same<rr1, char> ));
     BOOST_MPL_ASSERT(( boost::is_same<rr2, char> ));
     BOOST_MPL_ASSERT(( boost::is_same<rr3, char> ));
+
+    BOOST_MPL_ASSERT(( boost::is_same< mpl::deref<iter2>::type, char> ));
     return 0;
 }
